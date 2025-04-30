@@ -11,17 +11,11 @@ export const createUser = async (req, res) => {
 
     if (findUser) {
         res.status(400).json("Email already exist11!");
+    } else {
+        const newUser = await prisma.user.create({
+            data: { name, email, password }, // <- Make sure these fields match your model
+          });
+    
+        res.status(200).json({ data: newUser, message:"User created1!"})
     }
-
-    const newUser = await prisma.user.create({
-        data: { name, email, password }, // <- Make sure these fields match your model
-      });
-
-    // const newUser = await prisma.user.create({
-    //     email: email,
-    //     name: name,
-    //     password: password
-    // })
-
-    res.status(200).json({ data: newUser, message:"User created1!"})
 }
