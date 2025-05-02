@@ -34,7 +34,6 @@ export const getUserByEmail = async (req, res, next) => {
 
 export const deleteUserByemail = async (req, res, next) => {
     const email = req.params.email;
-
     try {
         const user = await deleteUserByEmailServices(email);
         handelResponse(res, 201, 'success', user)
