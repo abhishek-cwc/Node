@@ -1,14 +1,16 @@
 import prisma from "../config/db-config.js";
 
 export const getAllUserServices = async () => {
-    const allUser = await prisma.user.findMany();
+    //const allUser = await prisma.user.findMany();
+    const allUser = await prisma.$queryRaw`SELECT * FROM User`;
     return allUser;
 }
 
-export const getUserByEmailServices = async (email) => {
-    const user = await prisma.user.findUnique({
-        where: {email: email},
-    });
+export const getUserByEmailServices = async (email) => {    
+    // const user = await prisma.user.findUnique({
+    //     where: {email: email},
+    // });    
+    const user = await prisma.$queryRaw`SELECT * FROM User where email = ${email} `;
     return user;
 }
 

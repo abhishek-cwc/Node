@@ -12,7 +12,7 @@ const handelResponse = (res, status, msg, data = null) => {
     });
 }
 
-export const getAllUser = async (req, res) => {
+export const getAllUser = async (req, res, next) => {
     try {
         const allUser = await getAllUserServices();
         handelResponse(res, 201, 'success', allUser)
@@ -22,7 +22,7 @@ export const getAllUser = async (req, res) => {
     }
 }
 
-export const getUserByEmail = async (req, res) => {
+export const getUserByEmail = async (req, res, next) => {
     const email = req.params.email;
     try {
         const user = await getUserByEmailServices(email);
@@ -32,7 +32,7 @@ export const getUserByEmail = async (req, res) => {
     }
 }
 
-export const deleteUserByemail = async (req, res) => {
+export const deleteUserByemail = async (req, res, next) => {
     const email = req.params.email;
 
     try {
