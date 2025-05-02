@@ -17,5 +17,8 @@ COPY . .
 # Optional: generate Prisma client here if you don't migrate in build
 RUN npx prisma generate
 
+# Start the app and deploy te schema
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run server"]
+
 # Start the app
-CMD ["npm", "run", "server"]
+#CMD ["npm", "run", "server"]
