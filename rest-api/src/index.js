@@ -1,6 +1,7 @@
 import "dotenv/config"
 import express from "express";
 import userRoute from "./route/index.js";
+import { errorHandeler } from "./middleware/errorHandler.js";
 
 const app = new express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({extended: false}))
 
 // Use middleware for routing
 app.use(userRoute) 
+app.use(errorHandeler);
 
 app.listen(PORT, () => {
     console.log(`app is running on http://localhost:${PORT} `);

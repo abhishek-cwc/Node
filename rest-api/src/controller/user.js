@@ -1,42 +1,54 @@
-import prisma from "../config/db-config.js";
+import { 
+    getAllUserServices, 
+    getUserByEmailServices, 
+    deleteUserByEmailServices,
+    createUserServices
+ } from "../model/user.js";
+
+const handelResponse = (res, status, msg, data = null) => {
+    res.status(status).json({
+        data:data,
+        message: msg
+    });
+}
 
 export const getAllUser = async (req, res) => {
-    const allUser = await prisma.user.findMany();
-    res.status(200).json({data:allUser})
+    try {
+        const allUser = await getAllUserServices();
+        handelResponse(res, 201, 'success', allUser)
+
+    } catch (err) {
+        next(err);
+    }
 }
 
 export const getUserByEmail = async (req, res) => {
     const email = req.params.email;
-    const user = await prisma.user.findUnique({
-        where: {email: email},
-    });
-    res.status(200).json({data:user})
+    try {
+        const user = await getUserByEmailServices(email);
+        handelResponse(res, 201, 'success', user)
+    } catch(err) {
+        next(err)
+    }
 }
 
 export const deleteUserByemail = async (req, res) => {
     const email = req.params.email;
 
-    const user = await prisma.user.delete({
-        where: {email: email}
-    })
-    res.status(200).json({data:user})
+    try {
+        const user = await deleteUserByEmailServices(email);
+        handelResponse(res, 201, 'success', user)
+    } catch(err) {
+        next(err)
+    }
 }
 
-export const createUser = async (req, res) => {
+export const createUser = async (req, res, next) => {
     const {name, email, password } = req.body;
-
-    const findUser = await prisma.user.findUnique({
-        where: {
-            email: email
-        }
-    });
-    if (findUser) {
-        res.status(400).json("Email already exist11!");
-    } else {
-        const newUser = await prisma.user.create({
-            data: { name, email, password }, // <- Make sure these fields match your model
-          });
-    
-        res.status(200).json({ data: newUser, message:"User created1!"})
+    try {
+        const user = await createUserServices(name, email, password)
+        handelResponse(res, 201, 'success', user)
+    } catch(err) {
+        next(err)
     }
 }
