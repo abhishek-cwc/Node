@@ -12,7 +12,10 @@ export const getUserByEmailServices = async (email) => {
     // const user = await prisma.user.findUnique({
     //     where: {email: email},
     // });    
-    const user = await prisma.$queryRaw`SELECT * FROM User where email = ${email} `;
+    const [user] = await prisma.$queryRaw`SELECT * FROM User where email = ${email} `;
+    if (!user) {
+        throw new Error("User not found!!")
+    }
     return user;
 }
 
