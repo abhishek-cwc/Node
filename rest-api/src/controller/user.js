@@ -2,7 +2,8 @@ import {
     getAllUserServices, 
     getUserByEmailServices, 
     deleteUserByEmailServices,
-    createUserServices
+    createUserServices,
+    loginUserServices
  } from "../model/user.js";
 
 const handelResponse = (res, status, msg, data = null) => {
@@ -46,6 +47,16 @@ export const createUser = async (req, res, next) => {
     const {name, email, password } = req.body;
     try {
         const user = await createUserServices(name, email, password)
+        handelResponse(res, 201, 'success', user)
+    } catch(err) {
+        next(err)
+    }
+}
+
+export const loginUser = async (req, res, next) => {
+    const {email, password } = req.body;
+    try {
+        const user = await loginUserServices(email, password)
         handelResponse(res, 201, 'success', user)
     } catch(err) {
         next(err)
