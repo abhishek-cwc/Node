@@ -1,4 +1,25 @@
 Customer Api:
+GET API:
 
 http://localhost:3000/rest/V1/user/userDetail/pa22@gmail.com
+
+
+POST API:
+
+http://localhost:3000/rest/V1/user/login
+Payload:
+{
+  "email": "pa22@gmail.com",
+  "password": "123456"
+}
+
+http://localhost:3000/rest/V1/user/signup
+Payload:
+{
+  "name": "testt",  
+  "email": "pa22@gmail.com",
+  "password": "123456"
+}
+
+
 
