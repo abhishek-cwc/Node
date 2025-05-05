@@ -9,19 +9,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
+model customer {
+  id    Int @id @default(autoincrement())
   name  String
   email String  @unique
   password String
-  post Post[]
+  created_at DateTime @default(now())
+  customer_billing_address customer_billing_address[]
+  customer_shipping_address customer_shipping_address[]
 }
 
-model Post {
+model customer_billing_address {
   id    Int  @id @default(autoincrement())
-  title  String
-  post String 
-  user_id Int
+  street  String
+  city  String
+  region  String
+  postcode String 
+  customer_id Int
   created_at DateTime @default(now())
-  user User @relation(fields: [user_id], references: [id])
+  customer customer @relation(fields: [customer_id], references: [id])
+}
+
+model customer_shipping_address {
+  id    Int  @id @default(autoincrement())
+  street  String
+  city  String
+  region  String
+  postcode String 
+  customer_id Int
+  created_at DateTime @default(now())
+  customer customer @relation(fields: [customer_id], references: [id])
 }
