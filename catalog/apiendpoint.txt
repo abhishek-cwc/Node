@@ -1,0 +1,11 @@
+npm install prisma
+npx prisma init
+npm install @prisma/client
+npx prisma migrate dev --name init
+
+
+Get:
+http://localhost:3001/rest/v1/product
+
+http://localhost:3001/rest/v1/product
+
