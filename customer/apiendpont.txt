@@ -1,24 +1,42 @@
 Customer Api:
 GET API:
 
-http://localhost:3000/rest/V1/user/userDetail/pa22@gmail.com
+http://localhost:3000/rest/V1/customer/customerDetail/pa22@gmail.com
 
 
 POST API:
 
-http://localhost:3000/rest/V1/user/login
+http://localhost:3000/rest/V1/customer/login
 Payload:
 {
   "email": "pa22@gmail.com",
   "password": "123456"
 }
 
-http://localhost:3000/rest/V1/user/signup
+http://localhost:3000/rest/V1/customer/signup
 Payload:
 {
   "name": "testt",  
   "email": "pa22@gmail.com",
   "password": "123456"
+}
+
+http://localhost:3000/rest/V1/customer/shipping
+Payload:
+{
+  "street": "test street",  
+  "city": "noida",
+  "postcode": "20130",
+  "region": "UP"
+}
+
+http://localhost:3000/rest/V1/customer/billing
+Payload:
+{
+  "street": "test street",  
+  "city": "noida",
+  "postcode": "20130",
+  "region": "UP"
 }
 
 
