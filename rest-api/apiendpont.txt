@@ -1,0 +1,4 @@
+Customer Api:
+
+http://localhost:3000/rest/V1/user/userDetail/pa22@gmail.com
+
